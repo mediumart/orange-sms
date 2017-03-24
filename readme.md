@@ -40,18 +40,18 @@ and you're good to go:
 ```php
 // prepare and send an sms in a fluent way
 $sms->message('Hello, my dear...')
-	->from('+237690000000')
-	->to('+237670000000')
-	->send();
+    ->from('+237690000000')
+    ->to('+237670000000')
+    ->send();
 ```
 
 You now have access to the full orange sms api through the `$sms` object  :
 ```php
 // sending SMS.
 $response = $sms->to('+237670000000')
-				->from('+237690000000')
-				->message('Hello, world!')
-				->send();
+                ->from('+237690000000')
+                ->message('Hello, world!')
+                ->send();
 
 // checking your balance(remaining sms units)
 // with optional country code filter ie: CIV
