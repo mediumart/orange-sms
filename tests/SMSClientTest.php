@@ -17,8 +17,8 @@ class SMSClientTest extends TestCase
         $client->setToken('token');
         $this->assertEquals('token', $client->getToken());
 
-        $client->setExpiresIn('12345');
-        $this->assertEquals('12345', $client->getExpiresIn());
+        $client->setTokenExpiresIn('12345');
+        $this->assertEquals('12345', $client->getTokenExpiresIn());
 
         // using array
         $client->configure([
@@ -26,7 +26,7 @@ class SMSClientTest extends TestCase
             'expires_in'   => '54321'
         ]);
         $this->assertEquals('new_token', $client->getToken());
-        $this->assertEquals('54321', $client->getExpiresIn());
+        $this->assertEquals('54321', $client->getTokenExpiresIn());
     }
 
     /**
@@ -40,14 +40,14 @@ class SMSClientTest extends TestCase
             'expires_in' => '7776000'
         ]);
         $this->assertEquals('access_token', $client->getToken());
-        $this->assertEquals('7776000', $client->getExpiresIn());
+        $this->assertEquals('7776000', $client->getTokenExpiresIn());
 
 
         // using getInstance()
         $client = SMSClient::getInstance('new_access_token');
 
         $this->assertEquals('new_access_token', $client->getToken());
-        $this->assertNull($client->getExpiresIn());
+        $this->assertNull($client->getTokenExpiresIn());
     }
 
     /**
@@ -69,7 +69,7 @@ class SMSClientTest extends TestCase
         // using static getInstance()
         $smsClient = SMSClient::getInstance($this->clientID, $this->clientSecret);
         $this->assertEquals('i6m2iIcY0SodWSe...L3ojAXXrH', $smsClient->getToken());
-        $this->assertEquals('7776000', $smsClient->getExpiresIn());
+        $this->assertEquals('7776000', $smsClient->getTokenExpiresIn());
     }
 
     /**

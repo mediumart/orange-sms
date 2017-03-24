@@ -2,6 +2,7 @@
 
 namespace Mediumart\Orange\SMS\Http\Requests;
 
+use Exception;
 use Mediumart\Orange\SMS\Http\SMSClientRequest;
 
 class OutboundSMSRequest extends SMSClientRequest
@@ -26,14 +27,17 @@ class OutboundSMSRequest extends SMSClientRequest
      * @param $recipientNumber
      * @param $senderNumber
      * @param $senderName
+     * @throws \Exception
      */
     public function __construct($message, $recipientNumber, $senderNumber, $senderName = null)
     {
+        $this->throwsExceptionIfNot($recipientNumber, $senderNumber);
+
         $this->sender = $senderNumber;
 
         $this->body = ['outboundSMSMessageRequest' => [
-               'address' => $recipientNumber ?: '',
-               'senderAddress' => $senderNumber ?: '',
+               'address' => $recipientNumber,
+               'senderAddress' => $senderNumber,
                'outboundSMSTextMessage' => [ 'message' => $message ?: '']
            ]
         ];
@@ -59,8 +63,6 @@ class OutboundSMSRequest extends SMSClientRequest
      */
     public function uri()
     {
-        if (! $this->sender ) throw new \Exception('URI Missing Sender number');
-
         return static::BASE_URI."/smsmessaging/v1/outbound/".urlencode($this->sender)."/requests";
     }
 
@@ -75,5 +77,19 @@ class OutboundSMSRequest extends SMSClientRequest
             'headers' => ["Content-Type" => "Application/json"],
             'body' => json_encode($this->body)
         ];
+    }
+
+    /**
+     * @param $recipientNumber
+     * @param $senderNumber
+     * @throws \Exception
+     */
+    private function throwsExceptionIfNot($recipientNumber, $senderNumber)
+    {
+        if (empty($senderNumber))
+            throw new Exception('Missing Sender number');
+
+        if (empty($recipientNumber))
+            throw new Exception('Missing Recipient number');
     }
 }

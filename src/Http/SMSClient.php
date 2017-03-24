@@ -70,7 +70,7 @@ class SMSClient
      * @param $expiresIn
      * @return $this
      */
-    public function setExpiresIn($expiresIn)
+    public function setTokenExpiresIn($expiresIn)
     {
         $this->expiresIn = $expiresIn;
 
@@ -82,7 +82,7 @@ class SMSClient
      *
      * @return string
      */
-    public function getExpiresIn()
+    public function getTokenExpiresIn()
     {
         return $this->expiresIn;
     }
@@ -99,7 +99,7 @@ class SMSClient
             $this->setToken($options['access_token']);
 
         if(array_key_exists('expires_in', $options))
-            $this->setExpiresIn($options['expires_in']);
+            $this->setTokenExpiresIn($options['expires_in']);
 
         return $this;
     }
