@@ -73,8 +73,7 @@ $response = $sms->setDeliveryReceiptNotificationUrl($url, $sender);
 
 // checking the SMS DR notification endpoint
 // '<your_last_registered_endpoint_ID>' $id
-// '<sender address>' $sender = '+237690000000'
-$response = $sms->checkDeliveryReceiptNotificationUrl($id, $sender);
+$response = $sms->checkDeliveryReceiptNotificationUrl($id);
 
 // delete the SMS DR notification endpoint
 // '<last_registered_endpoint_ID>' $id

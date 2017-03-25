@@ -13,23 +13,13 @@ class SMSDRCheckCallbackRequest extends SMSClientRequest
     private $id;
 
     /**
-     * @var string
-     */
-    private $sender;
-
-    /**
      * CheckSMSDRCallbackRequest constructor.
      * @param $id
-     * @param $sender
      * @throws \Exception
      */
-    public function __construct($id, $sender)
+    public function __construct($id)
     {
-        if(! $sender) throw new Exception('Missing sender address');
-
         if(! $id) throw new Exception('Missing subscription id');
-
-        $this->sender = 'tel:'.$sender;
 
         $this->id = $id;
     }

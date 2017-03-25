@@ -169,7 +169,7 @@ class SMS
     public function setDeliveryReceiptNotificationUrl($url, $sender = null)
     {
         return $this->client->executeRequest(
-            new SMSDRRegisterCallbackRequest($url, $sender ?: $this-$this->senderNumber)
+            new SMSDRRegisterCallbackRequest($url, $sender ?: $this->senderNumber)
         );
     }
 
@@ -177,13 +177,12 @@ class SMS
      * Check the SMS DR notification endpoint.
      *
      * @param $id
-     * @param $sender
      * @return array
      */
-    public function checkDeliveryReceiptNotificationUrl($id, $sender = null)
+    public function checkDeliveryReceiptNotificationUrl($id)
     {
         return $this->client->executeRequest(
-            new SMSDRCheckCallbackRequest($id, $sender ?: $this->senderNumber)
+            new SMSDRCheckCallbackRequest($id)
         );
     }
 
