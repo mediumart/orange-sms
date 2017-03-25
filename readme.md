@@ -49,7 +49,7 @@ You now have access to the full orange sms api through the `$sms` object  :
 ```php
 // sending SMS.
 $response = $sms->to('+237670000000')
-                ->from('+237690000000')
+                ->from('+237690000000', <'optional_sender_name>')
                 ->message('Hello, world!')
                 ->send();
 
@@ -68,15 +68,18 @@ $response = $sms->statistics('<country_code>', '<app_id>');
 
 // setting the SMS DR notification endpoint
 // '<your_backend_notification_url>' $url
-$response = $sms->setDeliveryReceiptNotificationUrl($url);
+// '<sender address>' $sender = '+237690000000'
+$response = $sms->setDeliveryReceiptNotificationUrl($url, $sender);
 
 // checking the SMS DR notification endpoint
 // '<your_last_registered_endpoint_ID>' $id
-$response = $sms->checkDeliveryReceiptNotificationUrl($id);
+// '<sender address>' $sender = '+237690000000'
+$response = $sms->checkDeliveryReceiptNotificationUrl($id, $sender);
 
 // delete the SMS DR notification endpoint
 // '<last_registered_endpoint_ID>' $id
-$response = $sms->deleteDeliveryReceiptNotificationUrl($id);
+// '<sender address>' $sender = '+237690000000'
+$response = $sms->deleteDeliveryReceiptNotificationUrl($id, $sender);
 
 ```
 
@@ -102,7 +105,7 @@ $token = $client->getToken();
 // get the token lifetime in seconds
 $tokenExpiresIn = $client->getTokenExpiresIn();
 ```
-If you wish you can also fetch your access token directly without resolving a client instance, using the static `authorize` method:
+If you wish, you can also fetch your access token directly without resolving a client instance, using the static `authorize` method:
 ```php
 $response = SMSClient::authorize('<client_id>', '<client_secret>');
 ```

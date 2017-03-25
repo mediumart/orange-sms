@@ -2,6 +2,7 @@
 
 namespace Mediumart\Orange\SMS\Http\Requests;
 
+use Exception;
 use Mediumart\Orange\SMS\Http\SMSClientRequest;
 
 class SMSDRCheckCallbackRequest extends SMSClientRequest
@@ -12,13 +13,27 @@ class SMSDRCheckCallbackRequest extends SMSClientRequest
     private $id;
 
     /**
+     * @var string
+     */
+    private $sender;
+
+    /**
      * CheckSMSDRCallbackRequest constructor.
      * @param $id
+     * @param $sender
+     * @throws \Exception
      */
-    public function __construct($id)
+    public function __construct($id, $sender)
     {
+        if(! $sender) throw new Exception('Missing sender address');
+
+        if(! $id) throw new Exception('Missing subscription id');
+
+        $this->sender = 'tel:'.$sender;
+
         $this->id = $id;
     }
+
     /**
      * Http request method.
      *
@@ -36,7 +51,7 @@ class SMSDRCheckCallbackRequest extends SMSClientRequest
      */
     public function uri()
     {
-        return static::BASE_URI.'/smsmessaging/v1/outbound/subscriptions/'.$this->id;
+        return static::BASE_URI.'/smsmessaging/v1/outbound/'.urlencode($this->sender).'/subscriptions/'.$this->id;
     }
 
     /**
@@ -47,7 +62,7 @@ class SMSDRCheckCallbackRequest extends SMSClientRequest
     public function options()
     {
         return [
-            'headers' => ['Content-Type: application/json']
+            'headers' => ['Content-Type' => 'application/json']
         ];
     }
 }

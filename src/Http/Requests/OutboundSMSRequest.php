@@ -31,12 +31,12 @@ class OutboundSMSRequest extends SMSClientRequest
      */
     public function __construct($message, $recipientNumber, $senderNumber, $senderName = null)
     {
-        $this->throwsExceptionIfNot($recipientNumber, $senderNumber);
+        $this->throwsExceptionIfEmpty($recipientNumber, $senderNumber);
 
-        $this->sender = $senderNumber;
+        $this->sender = 'tel:'.$senderNumber;
 
         $this->body = ['outboundSMSMessageRequest' => [
-               'address' => $recipientNumber,
+               'address' => 'tel:'.$recipientNumber,
                'senderAddress' => $senderNumber,
                'outboundSMSTextMessage' => [ 'message' => $message ?: '']
            ]
@@ -84,7 +84,7 @@ class OutboundSMSRequest extends SMSClientRequest
      * @param $senderNumber
      * @throws \Exception
      */
-    private function throwsExceptionIfNot($recipientNumber, $senderNumber)
+    private function throwsExceptionIfEmpty($recipientNumber, $senderNumber)
     {
         if (empty($senderNumber))
             throw new Exception('Missing Sender number');

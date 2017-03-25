@@ -64,4 +64,43 @@ class SMSTest extends TestCase
 
         $this->assertSame(['outboundSMSMessageRequest' => []], $response);
     }
+
+    /**
+     * @test
+     */
+    public function client_set_sms_dr_subscriptions_url()
+    {
+        $this->setupRequestContext('setDeliveryReceiptNotificationUrl');
+
+        $this->assertSame(['deliveryReceiptSubscription' => []], $this->SMS->setDeliveryReceiptNotificationUrl(
+            $this->callbackUri,
+            $this->sender
+        ));
+    }
+
+    /**
+     * @test
+     */
+    public function client_check_sms_dr_subscriptions_url()
+    {
+        $this->setupRequestContext('checkDeliveryReceiptNotificationUrl');
+
+        $this->assertSame(['deliveryReceiptSubscription' => []], $this->SMS->checkDeliveryReceiptNotificationUrl(
+            $this->smsDrSubscriptionID,
+            $this->sender
+        ));
+    }
+
+    /**
+     * @test
+     */
+    public function client_delete_sms_dr_subscriptions_url()
+    {
+        $this->setupRequestContext('deleteDeliveryReceiptNotificationUrl');
+
+        $this->assertNull($this->SMS->deleteDeliveryReceiptNotificationUrl(
+            $this->smsDrSubscriptionID,
+            $this->sender
+        ));
+    }
 }

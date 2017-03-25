@@ -68,7 +68,7 @@ class SMS
      */
     public function to($recipientNumber)
     {
-        $this->recipientNumber = 'tel:'.$recipientNumber;
+        $this->recipientNumber = $recipientNumber;
 
         return $this;
     }
@@ -82,7 +82,7 @@ class SMS
      */
     public function from($number, $name = null)
     {
-        $this->senderNumber = 'tel:'.$number;
+        $this->senderNumber = $number;
 
         $this->senderName = $name;
 
@@ -163,12 +163,13 @@ class SMS
      * Set the SMS DR notification endpoint.
      *
      * @param $url
+     * @param $sender
      * @return array
      */
-    public function setDeliveryReceiptNotificationUrl($url)
+    public function setDeliveryReceiptNotificationUrl($url, $sender = null)
     {
         return $this->client->executeRequest(
-            new SMSDRRegisterCallbackRequest($url)
+            new SMSDRRegisterCallbackRequest($url, $sender ?: $this-$this->senderNumber)
         );
     }
 
@@ -176,12 +177,13 @@ class SMS
      * Check the SMS DR notification endpoint.
      *
      * @param $id
+     * @param $sender
      * @return array
      */
-    public function checkDeliveryReceiptNotificationUrl($id)
+    public function checkDeliveryReceiptNotificationUrl($id, $sender = null)
     {
         return $this->client->executeRequest(
-            new SMSDRCheckCallbackRequest($id)
+            new SMSDRCheckCallbackRequest($id, $sender ?: $this->senderNumber)
         );
     }
 
@@ -189,12 +191,13 @@ class SMS
      * Delete the SMS DR notification endpoint.
      *
      * @param $id
+     * @param $sender
      * @return array
      */
-    public function deleteDeliveryReceiptNotificationUrl($id)
+    public function deleteDeliveryReceiptNotificationUrl($id, $sender = null)
     {
         return $this->client->executeRequest(
-            new SMSDRDeleteCallbackRequest($id)
+            new SMSDRDeleteCallbackRequest($id, $sender ?: $this->senderNumber)
         );
     }
 }

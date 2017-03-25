@@ -2,6 +2,7 @@
 
 namespace Mediumart\Orange\SMS\Http\Requests;
 
+use Exception;
 use Mediumart\Orange\SMS\Http\SMSClientRequest;
 
 class SMSDRRegisterCallbackRequest extends SMSClientRequest
@@ -10,15 +11,25 @@ class SMSDRRegisterCallbackRequest extends SMSClientRequest
      * @var array
      */
     protected $body;
+    /**
+     * @var string
+     */
+    private $senderAddress;
 
     /**
      * RegisterSMSDRCallbackRequest constructor.
      *
      * @param $callbackUri
+     * @param $senderAddress
+     * @throws \Exception
      */
-    public function __construct($callbackUri)
+    public function __construct($callbackUri, $senderAddress)
     {
         $this->enforceHttpSecureProtocol($callbackUri);
+
+        if(! $senderAddress) throw new Exception('Missing sender address');
+
+        $this->senderAddress = 'tel:'.$senderAddress;
 
         $this->body = [
             "deliveryReceiptSubscription" => [
@@ -46,8 +57,7 @@ class SMSDRRegisterCallbackRequest extends SMSClientRequest
      */
     public function uri()
     {
-        // not very sure about this one. never tested yet| confusing documentation..
-        return static::BASE_URI.'/smsmessaging/v1/outbound/tel%3A%2B400/subscriptions';
+        return static::BASE_URI.'/smsmessaging/v1/outbound/'.urlencode($this->senderAddress).'/subscriptions';
     }
 
     /**
@@ -58,7 +68,7 @@ class SMSDRRegisterCallbackRequest extends SMSClientRequest
     public function options()
     {
         return [
-            'headers' => ['Content-Type: application/json'],
+            'headers' => ['Content-Type' => 'application/json'],
             'body' => json_encode($this->body)
         ];
     }
