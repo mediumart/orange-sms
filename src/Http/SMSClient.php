@@ -2,6 +2,7 @@
 
 namespace Mediumart\Orange\SMS\Http;
 
+use GuzzleHttp\Exception\ClientException;
 use Mediumart\Orange\SMS\Http\Requests\AuthorizationRequest;
 
 class SMSClient
@@ -108,16 +109,19 @@ class SMSClient
      * Execute a request against the Api server
      *
      * @param SMSClientRequest $request
+     * @param bool $decodeJson
      * @return array
      */
-    public function executeRequest(SMSClientRequest $request)
+    public function executeRequest(SMSClientRequest $request, $decodeJson = true)
     {
         $options = $request->options();
 
         if(! isset($options['headers']["Authorization"]))
             $options['headers']["Authorization"] = "Bearer ". $this->getToken();
 
-        return json_decode($request->execute($options)->getBody(), true);
+        $response = $request->execute($options)->getBody();
+
+        return $decodeJson ? json_decode($response, true) : $response;
     }
 
     /**

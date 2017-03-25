@@ -73,7 +73,8 @@ abstract class SMSClientRequest
     final public function execute($options = null)
     {
         $client = static::$httpClient ?: new Client([
-            'verify' => static::$verify_ssl
+            'verify' => static::$verify_ssl,
+            'http_errors' => false
         ]);
 
         return $client->request(

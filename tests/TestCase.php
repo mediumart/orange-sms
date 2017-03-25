@@ -226,7 +226,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
         $body = json_decode($options['body'], true);
 
         $sender = $body['outboundSMSMessageRequest']['senderAddress'];
-        $endpoint = "https://api.orange.com/smsmessaging/v1/outbound/".urlencode('tel:'.$sender)."/requests";
+        $endpoint = "https://api.orange.com/smsmessaging/v1/outbound/".urlencode($sender)."/requests";
 
         if($method !== 'POST')
             throw new ClientException('wrong method', new Request('*', '*'));
@@ -271,10 +271,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
         if($method !== 'GET')
             throw new ClientException('wrong method', new Request('*', '*'));
 
-        if(
-            $uri !== 'https://api.orange.com/smsmessaging/v1/outbound/'
-            .urlencode('tel:'.$this->sender).'/subscriptions/'.$this->smsDrSubscriptionID
-        )
+        if($uri !== 'https://api.orange.com/smsmessaging/v1/outbound/subscriptions/'.$this->smsDrSubscriptionID)
             throw new ClientException('wrong uri', new Request('*', '*'));
 
         if($options != $this->mockSMSDRCheckAndDeleteOptions())

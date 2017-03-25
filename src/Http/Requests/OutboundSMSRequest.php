@@ -37,7 +37,7 @@ class OutboundSMSRequest extends SMSClientRequest
 
         $this->body = ['outboundSMSMessageRequest' => [
                'address' => 'tel:'.$recipientNumber,
-               'senderAddress' => $senderNumber,
+               'senderAddress' => 'tel:'.$senderNumber,
                'outboundSMSTextMessage' => [ 'message' => $message ?: '']
            ]
         ];

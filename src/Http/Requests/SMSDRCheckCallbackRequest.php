@@ -51,7 +51,8 @@ class SMSDRCheckCallbackRequest extends SMSClientRequest
      */
     public function uri()
     {
-        return static::BASE_URI.'/smsmessaging/v1/outbound/'.urlencode($this->sender).'/subscriptions/'.$this->id;
+        // '.urlencode($this->sender).'/
+        return static::BASE_URI.'/smsmessaging/v1/outbound/subscriptions/'.$this->id;
     }
 
     /**
