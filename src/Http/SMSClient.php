@@ -2,7 +2,6 @@
 
 namespace Mediumart\Orange\SMS\Http;
 
-use GuzzleHttp\Exception\ClientException;
 use Mediumart\Orange\SMS\Http\Requests\AuthorizationRequest;
 
 class SMSClient

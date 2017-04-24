@@ -7,7 +7,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Exception\ClientException;
 
-class TestCase extends \PHPUnit_Framework_TestCase
+class TestCase extends \Orchestra\Testbench\TestCase
 {
     /**
      * @var string
@@ -50,6 +50,20 @@ class TestCase extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         m::close();
+    }
+
+    /**
+     * Get package providers.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return array
+     */
+    protected function getPackageProviders($app)
+    {
+        return [
+            \Mediumart\Orange\SMS\OrangeSmsServiceProvider::class,
+        ];
     }
 
     /**
