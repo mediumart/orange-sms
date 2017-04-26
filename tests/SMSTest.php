@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Orange\SMS\Tests;
 
 use Mediumart\Orange\SMS\Http\SMSClient;
 use Mediumart\Orange\SMS\SMS;

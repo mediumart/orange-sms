@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests;
+namespace Orange\SMS\Tests;
 
 use Mockery;
 use Mediumart\Orange\SMS\SMS;
 use Illuminate\Support\Facades\Cache;
 use Mediumart\Orange\SMS\Http\SMSClient;
-use Mediumart\Orange\SMS\OrangeSmsServiceProvider;
+use Mediumart\Orange\SMS\Laravel\OrangeSmsServiceProvider;
 
 class OrangeSmsServiceProviderTest extends TestCase
 {

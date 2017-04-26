@@ -1,8 +1,9 @@
 <?php
 
-namespace Mediumart\Orange\SMS;
+namespace Mediumart\Orange\SMS\Laravel;
 
 use Carbon\Carbon;
+use Mediumart\Orange\SMS\SMS;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 use Mediumart\Orange\SMS\Http\SMSClient;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Mediumart\Orange\SMS\Notification;
+namespace Mediumart\Orange\SMS\Laravel\Notification;
 
 /**
  * Class OrangeMessage
- * @package App\Notifications\Messages
+ * @package Mediumart\Orange\SMS\Laravel\Notification
  */
 class OrangeMessage
 {
@@ -25,7 +25,7 @@ class OrangeMessage
 
     /**
      * @param $to
-     * @return \Mediumart\Orange\SMS\Notification\OrangeMessage
+     * @return \Mediumart\Orange\SMS\Laravel\Notification\OrangeMessage
      */
     public function to($to)
     {
@@ -36,7 +36,7 @@ class OrangeMessage
 
     /**
      * @param $from
-     * @return \Mediumart\Orange\SMS\Notification\OrangeMessage
+     * @return \Mediumart\Orange\SMS\Laravel\Notification\OrangeMessage
      */
     public function from($from)
     {
@@ -47,7 +47,7 @@ class OrangeMessage
 
     /**
      * @param string $text
-     * @return \Mediumart\Orange\SMS\Notification\OrangeMessage
+     * @return \Mediumart\Orange\SMS\Laravel\Notification\OrangeMessage
      */
     public function text($text = '')
     {

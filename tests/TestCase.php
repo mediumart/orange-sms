@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Orange\SMS\Tests;
 
 use \Mockery as m;
 use GuzzleHttp\Psr7\Request;
@@ -50,6 +50,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     public function tearDown()
     {
         m::close();
+
+        parent::tearDown();
     }
 
     /**
@@ -62,7 +64,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Mediumart\Orange\SMS\OrangeSmsServiceProvider::class,
+            \Mediumart\Orange\SMS\Laravel\OrangeSmsServiceProvider::class,
         ];
     }
 

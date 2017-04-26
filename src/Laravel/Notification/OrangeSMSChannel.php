@@ -1,11 +1,11 @@
 <?php
 
-namespace Mediumart\Orange\SMS\Notification;
+namespace Mediumart\Orange\SMS\Laravel\Notification;
 
+use Mediumart\Orange\SMS\SMS;
 use Illuminate\Support\Facades\App;
 use Illuminate\Notifications\Notification;
 use Mediumart\Notifier\Contracts\Channels\Channel;
-use Mediumart\Orange\SMS\SMS;
 
 class OrangeSMSChannel implements Channel
 {
@@ -35,10 +35,10 @@ class OrangeSMSChannel implements Channel
         $message = $notification->toOrange($notifiable);
 
         if($message) {
-            $this->client->to($message->to)
-                        ->from($message->from)
-                        ->message($message->text)
-                        ->send();
+           return $this->client->to($message->to)
+                               ->from($message->from)
+                               ->message($message->text)
+                               ->send();
         }
     }
 
