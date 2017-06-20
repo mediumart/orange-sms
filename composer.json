@@ -2,7 +2,7 @@
     "name": "mediumart/orange-sms",
     "type": "library",
     "license": "MIT",
-    "keywords": ["orange", "orange-api", "sms"],
+    "keywords": ["orange", "orange-api", "sms", "laravel"],
     "description": "A php library to interact with the orange sms api.",
     "authors": [
         {
@@ -28,6 +28,13 @@
     "autoload-dev": {
         "psr-4": {
             "Orange\\SMS\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mediumart\\Orange\\SMS\\Laravel\\OrangeSmsServiceProvider"
+            ]
         }
     }
 }
