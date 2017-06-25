@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/mediumart/orange-sms.svg?branch=master)](https://travis-ci.org/mediumart/orange-sms)
 
 ## Description
-A php library to interact with the orange sms api.
+A php library to interact with the orange sms api for MiddleEast and Africa.
 
 ## Installation
 

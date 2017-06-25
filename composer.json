@@ -3,7 +3,7 @@
     "type": "library",
     "license": "MIT",
     "keywords": ["orange", "orange-api", "sms", "laravel"],
-    "description": "A php library to interact with the orange sms api.",
+    "description": "A php library to interact with the orange sms api for MiddleEast and Africa.",
     "authors": [
         {
             "name": "Isaac Esso",
