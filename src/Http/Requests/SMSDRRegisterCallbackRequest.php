@@ -29,7 +29,7 @@ class SMSDRRegisterCallbackRequest extends SMSClientRequest
 
         if(! $senderAddress) throw new Exception('Missing sender address');
 
-        $this->senderAddress = 'tel:'.$senderAddress;
+        $this->senderAddress = 'tel:'.$this->normalizePhoneNumber($senderAddress);
 
         $this->body = [
             "deliveryReceiptSubscription" => [

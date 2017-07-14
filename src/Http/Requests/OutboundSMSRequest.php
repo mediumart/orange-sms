@@ -33,11 +33,11 @@ class OutboundSMSRequest extends SMSClientRequest
     {
         $this->throwsExceptionIfEmpty($recipientNumber, $senderNumber);
 
-        $this->sender = 'tel:'.$senderNumber;
+        $this->sender = 'tel:'.$this->normalizePhoneNumber($senderNumber);
 
         $this->body = ['outboundSMSMessageRequest' => [
-               'address' => 'tel:'.$recipientNumber,
-               'senderAddress' => 'tel:'.$senderNumber,
+               'address' => 'tel:'.$this->normalizePhoneNumber($recipientNumber),
+               'senderAddress' => 'tel:'.$this->normalizePhoneNumber($senderNumber),
                'outboundSMSTextMessage' => [ 'message' => $message ?: '']
            ]
         ];

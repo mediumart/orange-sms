@@ -83,4 +83,21 @@ abstract class SMSClientRequest
             $options ?: $this->options()
         );
     }
+
+    /**
+     * Normalize phone number.
+     *  
+     * @param  $phone
+     * @return string   
+     */
+    protected function normalizePhoneNumber($phone)
+    {
+        $phone = (string) $phone;
+
+        if (substr($phone, 0, 1) !== '+') {
+            return '+' . $phone;
+        }
+
+        return $phone;
+    }
 }

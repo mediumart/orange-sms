@@ -29,7 +29,7 @@ class SMSDRDeleteCallbackRequest extends SMSClientRequest
 
         if(! $id) throw new Exception('Missing subscription id');
 
-        $this->sender = 'tel:'.$sender;
+        $this->sender = 'tel:'.$this->normalizePhoneNumber($sender);
 
         $this->id = $id;
     }
