@@ -59,7 +59,7 @@ class SMSTest extends TestCase
 
         $response = $this->SMS->message('hello')
                               ->from('+123456789')
-                              ->to('+987654321')
+                              ->to('987654321')
                               ->send();
 
         $this->assertSame(['outboundSMSMessageRequest' => []], $response);

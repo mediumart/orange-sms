@@ -77,10 +77,11 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     public function mockGuzzleHttpClientResponse($method, $uri, $options)
     {
-        if(!$this->context) throw new \Exception('Request context need to be set before mocking response.');
+        if (!$this->context) {
+            throw new \Exception('Request context need to be set before mocking response.');
+        }
 
-        switch ($this->context)
-        {
+        switch ($this->context) {
             case 'authorization':
                 return $this->handleAuthorizationRequestResponse($method, $uri, $options);
                 break;
@@ -132,14 +133,17 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     private function handleAuthorizationRequestResponse($method, $uri, $options)
     {
-        if ($method !== 'POST')
+        if ($method !== 'POST') {
             throw new ClientException('wrong method', new Request('*', '*'));
+        }
 
-        if($uri !== 'https://api.orange.com/oauth/v2/token')
-           throw new ClientException('wrong uri', new Request('*', '*'));
+        if ($uri !== 'https://api.orange.com/oauth/v2/token') {
+            throw new ClientException('wrong uri', new Request('*', '*'));
+        }
 
-        if($options != $this->mockAuthorizationRequestOptions())
+        if ($options != $this->mockAuthorizationRequestOptions()) {
             throw new ClientException('No matching options', new Request('*', '*'));
+        }
 
         return $this->successResponse([
             "token_type" => "Bearer",
@@ -158,14 +162,17 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         $uri = explode('?', $uri)[0];
 
-        if($method !== 'GET')
+        if ($method !== 'GET') {
             throw new ClientException('wrong method', new Request('*', '*'));
+        }
 
-        if($uri !== 'https://api.orange.com/sms/admin/v1/contracts')
+        if ($uri !== 'https://api.orange.com/sms/admin/v1/contracts') {
             throw new ClientException('wrong uri', new Request('*', '*'));
+        }
 
-        if($options != $this->mockGenericRequestOptions())
+        if ($options != $this->mockGenericRequestOptions()) {
             throw new ClientException('No matching options', new Request('*', '*'));
+        }
 
         return $this->successResponse(['partnerContracts' => []]);
     }
@@ -180,14 +187,17 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         $uri = explode('?', $uri)[0];
 
-        if($method !== 'GET')
+        if ($method !== 'GET') {
             throw new ClientException('wrong method', new Request('*', '*'));
+        }
 
-        if($uri !== 'https://api.orange.com/sms/admin/v1/purchaseorders')
+        if ($uri !== 'https://api.orange.com/sms/admin/v1/purchaseorders') {
             throw new ClientException('wrong uri', new Request('*', '*'));
+        }
 
-        if($options != $this->mockGenericRequestOptions())
+        if ($options != $this->mockGenericRequestOptions()) {
             throw new ClientException('No matching options', new Request('*', '*'));
+        }
 
         return $this->successResponse(['purchaseOrders' => []]);
     }
@@ -202,14 +212,17 @@ class TestCase extends \PHPUnit\Framework\TestCase
     {
         $uri = explode('?', $uri)[0];
 
-        if($method !== 'GET')
+        if ($method !== 'GET') {
             throw new ClientException('wrong method', new Request('*', '*'));
+        }
 
-        if($uri !== 'https://api.orange.com/sms/admin/v1/statistics')
+        if ($uri !== 'https://api.orange.com/sms/admin/v1/statistics') {
             throw new ClientException('wrong uri', new Request('*', '*'));
+        }
 
-        if($options != $this->mockGenericRequestOptions())
+        if ($options != $this->mockGenericRequestOptions()) {
             throw new ClientException('No matching options', new Request('*', '*'));
+        }
 
         return $this->successResponse(['partnerStatistics' => []]);
     }
@@ -222,19 +235,22 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     private function handleOutboundSmsRequestResponse($method, $uri, $options)
     {
-        if(!$this->checkOutboundSmsRequestOptions($options))
+        if (!$this->checkOutboundSmsRequestOptions($options)) {
             throw new ClientException('No matching options', new Request('*', '*'));
+        }
 
         $body = json_decode($options['body'], true);
 
         $sender = $body['outboundSMSMessageRequest']['senderAddress'];
         $endpoint = "https://api.orange.com/smsmessaging/v1/outbound/".urlencode($sender)."/requests";
 
-        if($method !== 'POST')
+        if ($method !== 'POST') {
             throw new ClientException('wrong method', new Request('*', '*'));
+        }
 
-        if($uri !== $endpoint)
+        if ($uri !== $endpoint) {
             throw new ClientException('wrong uri', new Request('*', '*'));
+        }
 
         return $this->successResponse(['outboundSMSMessageRequest' => []]);
     }
@@ -247,17 +263,20 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     private function handleSMSDRRegisterCallbackRequestResponse($method, $uri, $options)
     {
-        if($method !== 'POST')
+        if ($method !== 'POST') {
             throw new ClientException('wrong method', new Request('*', '*'));
+        }
 
-        if(
+        if (
             $uri !== 'https://api.orange.com/smsmessaging/v1/outbound/'
             .urlencode('tel:'.$this->sender).'/subscriptions'
-        )
+        ) {
             throw new ClientException('wrong uri', new Request('*', '*'));
+        }
 
-        if($options != $this->mockSMSDRRegisterCallbackRequestOptions())
+        if ($options != $this->mockSMSDRRegisterCallbackRequestOptions()) {
             throw new ClientException('no matching options', new Request('*', '*'));
+        }
 
         return $this->successResponse(['deliveryReceiptSubscription' => []]);
     }
@@ -270,14 +289,17 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     private function handleSMSDRCheckCallbackRequestResponse($method, $uri, $options)
     {
-        if($method !== 'GET')
+        if ($method !== 'GET') {
             throw new ClientException('wrong method', new Request('*', '*'));
+        }
 
-        if($uri !== 'https://api.orange.com/smsmessaging/v1/outbound/subscriptions/'.$this->smsDrSubscriptionID)
+        if ($uri !== 'https://api.orange.com/smsmessaging/v1/outbound/subscriptions/'.$this->smsDrSubscriptionID) {
             throw new ClientException('wrong uri', new Request('*', '*'));
+        }
 
-        if($options != $this->mockSMSDRCheckAndDeleteOptions())
+        if ($options != $this->mockSMSDRCheckAndDeleteOptions()) {
             throw new ClientException('no matching options', new Request('*', '*'));
+        }
 
         return $this->successResponse(['deliveryReceiptSubscription' => []]);
     }
@@ -290,17 +312,20 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     private function handleSMSDRDeleteCallbackRequestResponse($method, $uri, $options)
     {
-        if($method !== 'DELETE')
+        if ($method !== 'DELETE') {
             throw new ClientException('wrong method', new Request('*', '*'));
+        }
 
-        if(
+        if (
             $uri !== 'https://api.orange.com/smsmessaging/v1/outbound/'
             .urlencode('tel:'.$this->sender).'/subscriptions/'.$this->smsDrSubscriptionID
-        )
+        ) {
             throw new ClientException('wrong uri', new Request('*', '*'));
+        }
 
-        if($options != $this->mockSMSDRCheckAndDeleteOptions())
+        if ($options != $this->mockSMSDRCheckAndDeleteOptions()) {
             throw new ClientException('no matching options', new Request('*', '*'));
+        }
 
         return $this->successResponse([], 204, [], 'No Content');
     }
@@ -387,7 +412,9 @@ class TestCase extends \PHPUnit\Framework\TestCase
      */
     private function checkOutboundSmsRequestOptions($options)
     {
-        if(!isset($options['body'])) return false;
+        if (!isset($options['body'])) {
+            return false;
+        }
 
         $body = json_decode($options['body'], true);
 

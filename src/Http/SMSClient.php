@@ -32,14 +32,18 @@ class SMSClient
      *
      * @throws \Error
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * Prevent object cloning.
      *
      * @return void
      */
-    public function __clone() {}
+    public function __clone()
+    {
+    }
 
     /**
      * Set the access token.
@@ -95,11 +99,13 @@ class SMSClient
      */
     public function configure(array $options)
     {
-        if(array_key_exists('access_token', $options))
+        if (array_key_exists('access_token', $options)) {
             $this->setToken($options['access_token']);
+        }
 
-        if(array_key_exists('expires_in', $options))
+        if (array_key_exists('expires_in', $options)) {
             $this->setTokenExpiresIn($options['expires_in']);
+        }
 
         return $this;
     }
@@ -115,8 +121,9 @@ class SMSClient
     {
         $options = $request->options();
 
-        if(! isset($options['headers']["Authorization"]))
+        if (! isset($options['headers']["Authorization"])) {
             $options['headers']["Authorization"] = "Bearer ". $this->getToken();
+        }
 
         $response = $request->execute($options)->getBody();
 
@@ -144,24 +151,21 @@ class SMSClient
      */
     public static function getInstance()
     {
-        if(!static::$instance)
-        {
+        if (!static::$instance) {
             static::$instance = new static();
         }
 
         $args = func_get_args();
 
-        if(count($args) === 1)
-        {
+        if (count($args) === 1) {
             $arg = $args[0];
 
-            if(is_string($arg)) static::$instance->configure(['access_token' => $arg, 'expires_in' => null]);
-
-            elseif(is_array($arg)) static::$instance->configure($arg);
-        }
-
-        elseif(count($args) > 1)
-        {
+            if (is_string($arg)) {
+                static::$instance->configure(['access_token' => $arg, 'expires_in' => null]);
+            } elseif (is_array($arg)) {
+                static::$instance->configure($arg);
+            }
+        } elseif (count($args) > 1) {
             $response = static::authorize($args[0], $args[1]);
 
             static::$instance->configure($response);

@@ -2,14 +2,14 @@
 
 namespace Mediumart\Orange\SMS;
 
+use Mediumart\Orange\SMS\Http\SMSClient;
 use Mediumart\Orange\SMS\Http\Requests\ContractsRequest;
-use Mediumart\Orange\SMS\Http\Requests\OrdersHistoryRequest;
+use Mediumart\Orange\SMS\Http\Requests\StatisticsRequest;
 use Mediumart\Orange\SMS\Http\Requests\OutboundSMSRequest;
+use Mediumart\Orange\SMS\Http\Requests\OrdersHistoryRequest;
 use Mediumart\Orange\SMS\Http\Requests\SMSDRCheckCallbackRequest;
 use Mediumart\Orange\SMS\Http\Requests\SMSDRDeleteCallbackRequest;
 use Mediumart\Orange\SMS\Http\Requests\SMSDRRegisterCallbackRequest;
-use Mediumart\Orange\SMS\Http\Requests\StatisticsRequest;
-use Mediumart\Orange\SMS\Http\SMSClient;
 
 class SMS
 {

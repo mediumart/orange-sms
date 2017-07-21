@@ -50,8 +50,9 @@ abstract class SMSClientRequest
      */
     public static function verify($value)
     {
-        if(is_bool($value) || is_string($value))
+        if (is_bool($value) || is_string($value)) {
             static::$verify_ssl = $value;
+        }
     }
 
     /**

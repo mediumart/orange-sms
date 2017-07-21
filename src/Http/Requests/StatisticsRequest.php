@@ -74,9 +74,13 @@ class StatisticsRequest extends SMSClientRequest
     {
         $filters = [];
 
-        if($this->countryCode) $filters['country'] = $this->countryCode;
+        if ($this->countryCode) {
+            $filters['country'] = $this->countryCode;
+        }
 
-        if($this->appID) $filters['appid'] = $this->appID;
+        if ($this->appID) {
+            $filters['appid'] = $this->appID;
+        }
 
         return $filters;
     }

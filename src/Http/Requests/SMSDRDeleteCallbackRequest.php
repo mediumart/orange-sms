@@ -25,9 +25,13 @@ class SMSDRDeleteCallbackRequest extends SMSClientRequest
      */
     public function __construct($id, $sender)
     {
-        if(! $sender) throw new Exception('Missing sender address');
+        if (! $sender) {
+            throw new Exception('Missing sender address');
+        }
 
-        if(! $id) throw new Exception('Missing subscription id');
+        if (! $id) {
+            throw new Exception('Missing subscription id');
+        }
 
         $this->sender = 'tel:'.$this->normalizePhoneNumber($sender);
 

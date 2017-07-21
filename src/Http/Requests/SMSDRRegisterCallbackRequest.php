@@ -27,7 +27,9 @@ class SMSDRRegisterCallbackRequest extends SMSClientRequest
     {
         $this->enforceHttpSecureProtocol($callbackUri);
 
-        if(! $senderAddress) throw new Exception('Missing sender address');
+        if (! $senderAddress) {
+            throw new Exception('Missing sender address');
+        }
 
         $this->senderAddress = 'tel:'.$this->normalizePhoneNumber($senderAddress);
 

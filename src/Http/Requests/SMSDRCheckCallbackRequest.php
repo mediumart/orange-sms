@@ -19,7 +19,9 @@ class SMSDRCheckCallbackRequest extends SMSClientRequest
      */
     public function __construct($id)
     {
-        if(! $id) throw new Exception('Missing subscription id');
+        if (! $id) {
+            throw new Exception('Missing subscription id');
+        }
 
         $this->id = $id;
     }

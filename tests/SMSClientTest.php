@@ -39,6 +39,7 @@ class SMSClientTest extends TestCase
             'access_token' => 'access_token',
             'expires_in' => '7776000'
         ]);
+        
         $this->assertEquals('access_token', $client->getToken());
         $this->assertEquals('7776000', $client->getTokenExpiresIn());
 

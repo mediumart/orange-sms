@@ -42,7 +42,9 @@ class OutboundSMSRequest extends SMSClientRequest
            ]
         ];
 
-        if ($senderName) $this->body['outboundSMSMessageRequest']['senderName'] = urlencode($senderName);
+        if ($senderName) {
+            $this->body['outboundSMSMessageRequest']['senderName'] = urlencode($senderName);
+        }
     }
 
     /**
@@ -86,10 +88,12 @@ class OutboundSMSRequest extends SMSClientRequest
      */
     private function throwsExceptionIfEmpty($recipientNumber, $senderNumber)
     {
-        if (empty($senderNumber))
+        if (empty($senderNumber)) {
             throw new Exception('Missing Sender number');
+        }
 
-        if (empty($recipientNumber))
+        if (empty($recipientNumber)) {
             throw new Exception('Missing Recipient number');
+        }
     }
 }
