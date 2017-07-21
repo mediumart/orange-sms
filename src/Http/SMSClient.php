@@ -37,15 +37,6 @@ class SMSClient
     }
 
     /**
-     * Prevent object cloning.
-     *
-     * @return void
-     */
-    public function __clone()
-    {
-    }
-
-    /**
      * Set the access token.
      *
      * @param $token
