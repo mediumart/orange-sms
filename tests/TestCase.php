@@ -42,6 +42,12 @@ class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * @var string
      */
+    protected $callbackUriNotSecured = 'http://test';
+
+
+    /**
+     * @var string
+     */
     protected $smsDrSubscriptionID = '56e19nt197703244e46181c8';
 
     /**
@@ -50,6 +56,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
     public function tearDown()
     {
         m::close();
+
+        \Mediumart\Orange\SMS\Http\SMSClientRequest::verify(true);
 
         parent::tearDown();
     }
@@ -66,6 +74,22 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $client = $this->mockGuzzleHttpClientRequest();
 
         \Mediumart\Orange\SMS\Http\SMSClientRequest::setHttpClient($client);
+    }
+
+    /**
+     * @return m\MockInterface
+     */
+    public function mockGuzzleHttpClientRequest()
+    {
+        $client = m::mock(new \GuzzleHttp\Client);
+
+        $client->shouldReceive('request')->with(
+            \Mockery::type('string'),
+            \Mockery::type('string'),
+            \Mockery::type('array')
+        )->andReturnUsing([$this, 'mockGuzzleHttpClientResponse']);
+
+        return $client;
     }
 
     /**
@@ -107,22 +131,6 @@ class TestCase extends \PHPUnit\Framework\TestCase
                 return $this->handleSMSDRDeleteCallbackRequestResponse($method, $uri, $options);
                 break;
         }
-    }
-
-    /**
-     * @return m\MockInterface
-     */
-    public function mockGuzzleHttpClientRequest()
-    {
-        $client = m::mock('\GuzzleHttp\Client');
-
-        $client->shouldReceive('request')->with(
-            \Mockery::type('string'),
-            \Mockery::type('string'),
-            \Mockery::type('array')
-        )->andReturnUsing([$this, 'mockGuzzleHttpClientResponse']);
-
-        return $client;
     }
 
     /**

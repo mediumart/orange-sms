@@ -66,6 +66,22 @@ abstract class SMSClientRequest
     }
 
     /**
+     * Get the http client.
+     *
+     * @return \GuzzleHttp\Client
+     */
+    public static function getHttpClient()
+    {
+        if (static::$httpClient &&
+            static::$httpClient->getConfig('verify') === static::$verify_ssl
+            ) {
+            return static::$httpClient;
+        }
+
+        return new Client(['http_errors' => false, 'verify' => static::$verify_ssl]);
+    }
+
+    /**
      * Execute the request.
      *
      * @param null $options
@@ -73,12 +89,7 @@ abstract class SMSClientRequest
      */
     final public function execute($options = null)
     {
-        $client = static::$httpClient ?: new Client([
-            'verify' => static::$verify_ssl,
-            'http_errors' => false
-        ]);
-
-        return $client->request(
+        return $this->getHttpClient()->request(
             $this->method(),
             $this->uri(),
             $options ?: $this->options()
@@ -87,9 +98,9 @@ abstract class SMSClientRequest
 
     /**
      * Normalize phone number.
-     *  
+     *
      * @param  $phone
-     * @return string   
+     * @return string
      */
     protected function normalizePhoneNumber($phone)
     {

@@ -103,4 +103,22 @@ class SMSTest extends TestCase
             $this->sender
         ));
     }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     */
+    public function client_set_sms_dr_subscriptions_url_not_secure_protocol_argument_exception()
+    {
+        $this->SMS->setDeliveryReceiptNotificationUrl(
+            $this->callbackUriNotSecured,
+            $this->sender
+        );
+    }
+
+    /** @test */
+    public function it_fluently_set_sms_client() 
+    {
+        $this->assertInstanceOf(SMS::class, $this->SMS->setClient(SMSClient::getInstance()));
+    }
 }
