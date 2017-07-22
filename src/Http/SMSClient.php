@@ -97,16 +97,16 @@ class SMSClient
         switch (count($options)) {
             case 1:
                 if (is_string($options[0])) {
-                    return $this
+                    $this
                         ->setTokenExpiresIn(null)
                         ->setToken($options[0]);
                 } elseif (is_array($options[0])) {
-                    return $this->configureArrayOptions($options[0]);
+                    $this->configureArrayOptions($options[0]);
                 }
                 break;
 
             case 2:
-                return $this->configureArrayOptions(
+                $this->configureArrayOptions(
                     static::authorize($options[0], $options[1])
                 );
                 break;
@@ -115,6 +115,8 @@ class SMSClient
                 throw new \InvalidArgumentException('invalid argument count');
                 break;
         }
+
+        return $this;
     }
 
     /**
