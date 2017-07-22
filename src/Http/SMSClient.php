@@ -88,7 +88,42 @@ class SMSClient
      * @param array $options
      * @return $this
      */
-    public function configure(array $options)
+    public function configure(...$options)
+    {
+        if (count($options) <= 0) {
+            return $this;
+        }
+
+        switch (count($options)) {
+            case 1:
+                if (is_string($options[0])) {
+                    return $this
+                        ->setTokenExpiresIn(null)
+                        ->setToken($options[0]);
+                } elseif (is_array($options[0])) {
+                    return $this->configureArrayOptions($options[0]);
+                }
+                break;
+
+            case 2:
+                return $this->configureArrayOptions(
+                    static::authorize($options[0], $options[1])
+                );
+                break;
+
+            default:
+                throw new \InvalidArgumentException('invalid argument count');
+                break;
+        }
+    }
+
+    /**
+     * Configure instance using array options.
+     *
+     * @param  array  $options
+     * @return $this
+     */
+    protected function configureArrayOptions(array $options)
     {
         if (array_key_exists('access_token', $options)) {
             $this->setToken($options['access_token']);
@@ -142,26 +177,10 @@ class SMSClient
      */
     public static function getInstance()
     {
-        if (!static::$instance) {
+        if (! static::$instance) {
             static::$instance = new static();
         }
 
-        $args = func_get_args();
-
-        if (count($args) === 1) {
-            $arg = $args[0];
-
-            if (is_string($arg)) {
-                static::$instance->configure(['access_token' => $arg, 'expires_in' => null]);
-            } elseif (is_array($arg)) {
-                static::$instance->configure($arg);
-            }
-        } elseif (count($args) > 1) {
-            $response = static::authorize($args[0], $args[1]);
-
-            static::$instance->configure($response);
-        }
-
-        return static::$instance;
+        return static::$instance->configure(...func_get_args());
     }
 }

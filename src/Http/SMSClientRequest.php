@@ -89,11 +89,13 @@ abstract class SMSClientRequest
      */
     final public function execute($options = null)
     {
-        return $this->getHttpClient()->request(
-            $this->method(),
-            $this->uri(),
-            $options ?: $this->options()
-        );
+        return $this
+            ->getHttpClient()
+            ->request(
+                $this->method(), 
+                $this->uri(), 
+                $options ?: $this->options()
+            );
     }
 
     /**

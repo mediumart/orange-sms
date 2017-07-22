@@ -84,4 +84,14 @@ class SMSClientTest extends TestCase
 
         SMSClient::authorize('wrong_client_id', 'wrong_client_secret');
     }
+
+    /** 
+     * @test
+     * 
+     * @expectedException \InvalidArgumentException
+     */
+    public function configure_instance_with_invalid_arguments_count() 
+    {
+        SMSClient::getInstance('arg1', 'arg2', 'arg3');
+    }
 }
