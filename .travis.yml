@@ -10,7 +10,10 @@ sudo: false
 install: 
   - travis_retry composer install --no-interaction --prefer-dist
   - travis_retry composer require satooshi/php-coveralls --dev --no-interaction
+  - wget https://scrutinizer-ci.com/ocular.phar
 
 script: vendor/bin/phpunit --coverage-clover clover.xml --verbose
 
-after_success: travis_retry vendor/bin/coveralls -v
+after_success: 
+    - travis_retry vendor/bin/coveralls -v
+    - php ocular.phar code-coverage:upload --format=php-clover clover.xml
