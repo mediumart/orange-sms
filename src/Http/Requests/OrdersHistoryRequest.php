@@ -45,14 +45,4 @@ class OrdersHistoryRequest extends SMSClientRequest
 
         return $this->countryCode ? $uri.'?country='.$this->countryCode : $uri;
     }
-
-    /**
-     * @inherit
-     *
-     * @return array
-     */
-    public function options()
-    {
-        return [];
-    }
 }

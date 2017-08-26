@@ -40,7 +40,10 @@ abstract class SMSClientRequest
      *
      * @return array
      */
-    abstract public function options();
+    public function options()
+    {
+        return [];
+    }
 
     /**
      * Set the SSL certificate verification behavior of a request.

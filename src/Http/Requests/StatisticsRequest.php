@@ -58,16 +58,6 @@ class StatisticsRequest extends SMSClientRequest
     }
 
     /**
-     * @inherit
-     *
-     * @return array
-     */
-    public function options()
-    {
-        return [];
-    }
-
-    /**
      * @return array
      */
     private function queryFilters()
