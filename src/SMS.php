@@ -77,7 +77,7 @@ class SMS
      * set SMS sender details.
      *
      * @param string $number
-     * @param null $name
+     * @param string|null $name
      * @return $this
      */
     public function from($number, $name = null)
@@ -122,7 +122,7 @@ class SMS
     /**
      * Get SMS contracts.
      *
-     * @param null $country
+     * @param string|null $country
      * @return array
      */
     public function balance($country = null)
@@ -135,7 +135,7 @@ class SMS
     /**
      * Get SMS orders history.
      *
-     * @param null $country
+     * @param string|null $country
      * @return array
      */
     public function ordersHistory($country = null)
@@ -148,8 +148,8 @@ class SMS
     /**
      * Get SMS statistics.
      *
-     * @param null $country
-     * @param null $appID
+     * @param string|null $country
+     * @param string|null $appID
      * @return array
      */
     public function statistics($country = null, $appID = null)
