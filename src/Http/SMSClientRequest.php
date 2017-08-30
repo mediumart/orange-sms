@@ -87,7 +87,7 @@ abstract class SMSClientRequest
     /**
      * Execute the request.
      *
-     * @param null $options
+     * @param array|null $options
      * @return mixed|\Psr\Http\Message\ResponseInterface
      */
     final public function execute($options = null)

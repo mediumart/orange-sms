@@ -16,7 +16,7 @@ class ContractsRequest extends SMSClientRequest
 
     /**
      * ContractsRequest constructor.
-     * @param null $countryCode
+     * @param string|null $countryCode
      */
     public function __construct($countryCode = null)
     {

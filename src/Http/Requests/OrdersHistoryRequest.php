@@ -17,7 +17,7 @@ class OrdersHistoryRequest extends SMSClientRequest
     /**
      * SMSAdminPurchasedOrdersRequest constructor.
      *
-     * @param null $countryCode
+     * @param string|null $countryCode
      */
     public function __construct($countryCode = null)
     {
