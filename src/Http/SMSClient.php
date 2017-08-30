@@ -97,9 +97,7 @@ class SMSClient
         switch (count($options)) {
             case 1:
                 if (is_string($options[0])) {
-                    $this
-                        ->setTokenExpiresIn(null)
-                        ->setToken($options[0]);
+                    $this->setTokenExpiresIn(null)->setToken($options[0]);
                 } elseif (is_array($options[0])) {
                     $this->configureArrayOptions($options[0]);
                 }
