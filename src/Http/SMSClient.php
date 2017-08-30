@@ -25,14 +25,14 @@ class SMSClient
      *
      * @var static
      */
-    private static $instance;
+    protected static $instance;
 
     /**
      * SMSClient constructor.
      *
      * @throws \Error
      */
-    private function __construct()
+    protected function __construct()
     {
     }
 
