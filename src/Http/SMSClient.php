@@ -88,23 +88,18 @@ class SMSClient
      * @param array $options
      * @return $this
      */
-    public function configure(...$options)
+    public function configure()
     {
-        if (count($options) <= 0) {
-            return $this;
-        }
+        switch (count($options = func_get_args())) {
+            case 0:
+                break;
 
-        switch (count($options)) {
             case 1:
-                if (is_string($options[0])) {
-                    $this->setTokenExpiresIn(null)->setToken($options[0]);
-                } elseif (is_array($options[0])) {
-                    $this->configureArrayOptions($options[0]);
-                }
+                $this->configureInstance($options[0]);
                 break;
 
             case 2:
-                $this->configureArrayOptions(
+                $this->configureInstanceAssoc(
                     static::authorize($options[0], $options[1])
                 );
                 break;
@@ -118,12 +113,27 @@ class SMSClient
     }
 
     /**
-     * Configure instance using array options.
+     * Configure instance using options.
+     *
+     * @param  mixed  $options
+     * @return $this
+     */
+    protected function configureInstance($options)
+    {
+        if (is_string($options)) {
+            $this->setToken($options)->setTokenExpiresIn(null);
+        } elseif (is_array($options)) {
+            $this->configureInstanceAssoc($options);
+        }
+    }
+
+    /**
+     * Configure instance using assoc array options.
      *
      * @param  array  $options
      * @return $this
      */
-    protected function configureArrayOptions(array $options)
+    protected function configureInstanceAssoc(array $options)
     {
         if (array_key_exists('access_token', $options)) {
             $this->setToken($options['access_token']);
