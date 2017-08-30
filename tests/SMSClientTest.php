@@ -8,11 +8,12 @@ class SMSClientTest extends TestCase
 {
     /** 
      * @test
-     * @expectedException \Error
      */
     public function constructor_is_protected() 
     {
-        new SMSClient;
+        $this->assertFalse(
+            (new \ReflectionMethod(SMSClient::class, '__construct'))->isPublic()
+        );
     }
 
     /**
