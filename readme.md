@@ -1,7 +1,8 @@
 # orange-sms
 
 [![Build Status](https://travis-ci.org/mediumart/orange-sms.svg?branch=master)](https://travis-ci.org/mediumart/orange-sms)
-[![Coverage Status](https://coveralls.io/repos/github/mediumart/orange-sms/badge.svg?branch=master)](https://coveralls.io/github/mediumart/orange-sms?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/mediumart/orange-sms/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mediumart/orange-sms/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mediumart/orange-sms/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mediumart/orange-sms/?branch=master)
 
 ## Description
 A php library to interact with the orange sms api for MiddleEast and Africa.
