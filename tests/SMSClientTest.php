@@ -6,6 +6,15 @@ use Mediumart\Orange\SMS\Http\SMSClient;
 
 class SMSClientTest extends TestCase
 {
+    /** 
+     * @test
+     * @expectedException \Error
+     */
+    public function constructor_is_protected() 
+    {
+        new SMSClient;
+    }
+
     /**
      * @test
      */
