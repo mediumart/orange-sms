@@ -15,7 +15,7 @@ class SMSTest extends TestCase
     /**
      * setUp
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->SMS = new SMS(SMSClient::getInstance($this->token));
     }
@@ -110,6 +110,8 @@ class SMSTest extends TestCase
      */
     public function client_set_sms_dr_subscriptions_url_not_secure_protocol_argument_exception()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        
         $this->SMS->setDeliveryReceiptNotificationUrl(
             $this->callbackUriNotSecured,
             $this->sender

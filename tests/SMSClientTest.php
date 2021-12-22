@@ -86,11 +86,12 @@ class SMSClientTest extends TestCase
     /**
      * @test
      *
-     * @expectedException \GuzzleHttp\Exception\ClientException
      */
     public function client_authorization_request_with_wrong_credentials()
     {
         $this->setupRequestContext('authorization');
+
+        $this->expectException(\GuzzleHttp\Exception\ClientException::class);
 
         SMSClient::authorize('wrong_client_id', 'wrong_client_secret');
     }
@@ -98,10 +99,11 @@ class SMSClientTest extends TestCase
     /** 
      * @test
      * 
-     * @expectedException \InvalidArgumentException
      */
     public function configure_instance_with_invalid_arguments_count() 
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         SMSClient::getInstance('arg1', 'arg2', 'arg3');
     }
 }

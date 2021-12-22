@@ -53,7 +53,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * cleanUp
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
 
@@ -150,7 +150,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
         }
 
         if ($options != $this->mockAuthorizationRequestOptions()) {
-            throw new ClientException('No matching options', new Request('*', '*'));
+            throw new ClientException('No matching options', new Request('*', '*'), new Response);
         }
 
         return $this->successResponse([
