@@ -40,9 +40,9 @@ class OutboundSMSRequest extends SMSClientRequest
            ]
         ];
 
-        if ($senderName) {
-            $this->body['outboundSMSMessageRequest']['senderName'] = urlencode($senderName);
-        }
+        // if ($senderName) {
+        //     $this->body['outboundSMSMessageRequest']['senderName'] = urlencode($senderName);
+        // }
     }
 
     /**
