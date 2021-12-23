@@ -44,7 +44,7 @@ class AuthorizationRequest extends SMSClientRequest
      */
     public function uri()
     {
-        return static::BASE_URI.'/oauth/v2/token';
+        return static::BASE_URI.'/oauth/v3/token';
     }
 
     /**
